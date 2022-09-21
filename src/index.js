@@ -17,9 +17,20 @@ refs.inputField.addEventListener(
 );
 
 function inputElement(evt) {
-  const inputValue = evt.target.value;
+  const inputValue = evt.target.value.trim();
+  if (inputValue === '') {
+    clearElems();
+    return;
+  }
 
   fetchCountries(inputValue).then(data => {
-    console.log(data);
+    if (data.length > 10) {
+      Notify.info('Too many matches found. Please enter a more specific name.');
+      clearElems();
+      return;
+    }
+
+    if (data.length >= 2 && data.length <= 10) {
+    }
   });
 }
